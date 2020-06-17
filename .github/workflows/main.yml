@@ -20,6 +20,7 @@ jobs:
       with:
         repoName : ProtocolRedefined/Ecosystem-Template-Repository
         branchName : master
+        data: steps.issuesSummary.outputs.openIssueSummary
         templateType: HandleBars
         sourceType: IssueSummary
         ClientType: Teams

@@ -19,20 +19,27 @@ async function run(): Promise<void> {
     });
     const openIssues = openIssueResponse.data;
     const openIssuesResp: any = openIssueResponse;
-    const openIssuesLink: string = openIssuesResp.url;
+    let openIssuesLink: string = openIssuesResp.url;
     const openUnassignedIssues = openUnassignedIssueResponse.data;
+    let openIssuesUnassignedLink = '';
     core.setOutput('openIssues', `${openIssues.length}`);
     core.setOutput('openIssuesUnassigned', `${openUnassignedIssues.length}`);
+    openIssuesLink = openIssuesLink.replace('api.github.com/repos/', 'github.com/');
+    openIssuesUnassignedLink = openIssuesLink.replace('state=open', 'q=is%3Aopen+no%3Aassignee');
     core.setOutput(
       'openIssuesLink',
-      openIssuesLink.replace('api.github.com/repos/', 'github.com/'),
+      openIssuesLink,
     );
     core.setOutput(
       'openIssuesUnassignedLink',
-      openIssuesLink
-        .replace('api.github.com/repos/', 'github.com/')
-        .replace('state=open', 'q=is%3Aopen+no%3Aassignee'),
+      openIssuesUnassignedLink,
     );
+    core.setOutput('openIssueSummary', {
+      openIssues: openIssues.length,
+      openIssuesUnassigned: openUnassignedIssues.length,
+      openIssuesLink,
+      openIssuesUnassignedLink,
+    });
   } catch (error) {
     core.setFailed(error.message);
   }
