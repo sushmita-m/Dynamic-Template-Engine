@@ -1,0 +1,10 @@
+name: 'Issue Summary Action'
+description: 'An action to fetch issue summary for a repo'
+author: 'anuraag016'
+inputs:
+  githubToken:
+    description: 'Use GITHUB_TOKEN variable'
+    default: ${{ github.token }}
+runs:
+  using: 'node12'
+  main: 'dist/summaryAction/index.js'
