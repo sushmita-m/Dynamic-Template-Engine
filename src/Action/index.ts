@@ -30,6 +30,7 @@ async function run(): Promise<void> {
     const clientTypeString: string = core.getInput('clientType');
     const accessToken: string = core.getInput('accessToken');
     const data: string = core.getInput('data');
+    core.debug(`Data Received: ${data}`);
     const dataJson: JSON = JSON.parse(data);
     const templateType: TemplateType = throwIfUndefined<TemplateType>(
       TemplateTypeMap.get(templateTypeString),

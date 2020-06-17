@@ -10595,6 +10595,7 @@ async function run() {
         const clientTypeString = core.getInput('clientType');
         const accessToken = core.getInput('accessToken');
         const data = core.getInput('data');
+        core.debug(`Data Received: ${data}`);
         const dataJson = JSON.parse(data);
         const templateType = throwIfUndefined(TemplateTypeMap.get(templateTypeString));
         let clientType;
