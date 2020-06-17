@@ -2857,14 +2857,21 @@ async function run() {
         });
         const openIssues = openIssueResponse.data;
         const openIssuesResp = openIssueResponse;
-        const openIssuesLink = openIssuesResp.url;
+        let openIssuesLink = openIssuesResp.url;
         const openUnassignedIssues = openUnassignedIssueResponse.data;
+        let openIssuesUnassignedLink = '';
         core.setOutput('openIssues', `${openIssues.length}`);
         core.setOutput('openIssuesUnassigned', `${openUnassignedIssues.length}`);
-        core.setOutput('openIssuesLink', openIssuesLink.replace('api.github.com/repos/', 'github.com/'));
-        core.setOutput('openIssuesUnassignedLink', openIssuesLink
-            .replace('api.github.com/repos/', 'github.com/')
-            .replace('state=open', 'q=is%3Aopen+no%3Aassignee'));
+        openIssuesLink = openIssuesLink.replace('api.github.com/repos/', 'github.com/');
+        openIssuesUnassignedLink = openIssuesLink.replace('state=open', 'q=is%3Aopen+no%3Aassignee');
+        core.setOutput('openIssuesLink', openIssuesLink);
+        core.setOutput('openIssuesUnassignedLink', openIssuesUnassignedLink);
+        core.setOutput('openIssueSummary', {
+            openIssues: openIssues.length,
+            openIssuesUnassigned: openUnassignedIssues.length,
+            openIssuesLink,
+            openIssuesUnassignedLink,
+        });
     }
     catch (error) {
         core.setFailed(error.message);
