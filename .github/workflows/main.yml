@@ -1,6 +1,7 @@
 name: GitHub CI
 
 on:
+  issues:
   push:
   schedule:
     # * is a special character in YAML so you have to quote this string
