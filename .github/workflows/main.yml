@@ -20,10 +20,10 @@ jobs:
       uses: ./
       with:
         repoName : ProtocolRedefined/Ecosystem-Template-Repository
-        branchName : master
+        branchName : mesav/demoAction
         data: ${{ steps.issueSummary.outputs.openIssueSummary }}
         templateType: HandleBars
-        sourceType: IssueSummary
+        sourceType: IssueReport
         ClientType: Teams
     - name: PrintOutput
       run: echo "${{ github.event }}"
