@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+      with:
+          ref: mesav/demoAction
     - name: IssueSummary
       id: issueSummary
       uses: ./.github/actions/summaryAction
