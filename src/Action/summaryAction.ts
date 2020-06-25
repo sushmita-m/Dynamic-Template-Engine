@@ -56,7 +56,6 @@ async function run(): Promise<void> {
       openIssuesLink,
       closedIssuesLink,
     });
-    console.log(openIssueResponse)
   } catch (error) {
     core.setFailed(error.message);
   }

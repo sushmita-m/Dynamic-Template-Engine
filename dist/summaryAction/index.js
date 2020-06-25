@@ -2885,7 +2885,6 @@ async function run() {
             openIssuesLink,
             closedIssuesLink,
         });
-        console.log(openIssueResponse);
     }
     catch (error) {
         core.setFailed(error.message);
