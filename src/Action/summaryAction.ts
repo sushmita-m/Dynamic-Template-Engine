@@ -6,40 +6,57 @@ async function run(): Promise<void> {
     const token: string = core.getInput('githubToken');
     const octokit = github.getOctokit(token);
     const { repo, owner } = github.context.repo;
+    const allIssueResponse = await octokit.issues.listForRepo({
+      repo,
+      owner,
+      state: 'all',
+    });
     const openIssueResponse = await octokit.issues.listForRepo({
       repo,
       owner,
       state: 'open',
     });
-    const openUnassignedIssueResponse = await octokit.issues.listForRepo({
+    const closedIssueResponse = await octokit.issues.listForRepo({
       repo,
       owner,
-      state: 'open',
-      assignee: 'none',
+      state: 'closed',
     });
+    const allIssues = allIssueResponse.data;
+    const allIssuesResp: any = allIssueResponse;
     const openIssues = openIssueResponse.data;
     const openIssuesResp: any = openIssueResponse;
-    let openIssuesLink: string = openIssuesResp.url;
-    const openUnassignedIssues = openUnassignedIssueResponse.data;
-    let openIssuesUnassignedLink = '';
+    const closedIssues = closedIssueResponse.data;
+    const closedIssuesResp: any = closedIssueResponse;
+    let allIssuesLink: string = allIssuesResp.url;
+    let openIssuesLink: string = allIssuesResp.url;
+    let closedIssuesLink: string = allIssuesResp.url;
+    core.setOutput('allIssues', `${allIssues.length}`);
     core.setOutput('openIssues', `${openIssues.length}`);
-    core.setOutput('openIssuesUnassigned', `${openUnassignedIssues.length}`);
+    core.setOutput('closedIssues', `${closedIssues.length}`);
+    allIssuesLink = allIssuesLink.replace('api.github.com/repos/', 'github.com/');
     openIssuesLink = openIssuesLink.replace('api.github.com/repos/', 'github.com/');
-    openIssuesUnassignedLink = openIssuesLink.replace('state=open', 'q=is%3Aopen+no%3Aassignee');
+    closedIssuesLink = closedIssuesLink.replace('api.github.com/repos/', 'github.com/');
+    core.setOutput(
+      'allIssuesLink',
+      allIssuesLink,
+    );
     core.setOutput(
       'openIssuesLink',
       openIssuesLink,
     );
     core.setOutput(
-      'openIssuesUnassignedLink',
-      openIssuesUnassignedLink,
+      'closedIssuesLink',
+      closedIssuesLink,
     );
     core.setOutput('openIssueSummary', {
+      allIssues: allIssues.length,
       openIssues: openIssues.length,
-      openIssuesUnassigned: openUnassignedIssues.length,
+      closedIssues: closedIssues.length,
+      allIssuesLink,
       openIssuesLink,
-      openIssuesUnassignedLink,
+      closedIssuesLink,
     });
+    console.log(openIssueResponse)
   } catch (error) {
     core.setFailed(error.message);
   }
