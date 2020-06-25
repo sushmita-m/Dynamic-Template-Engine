@@ -3,15 +3,13 @@ name: GitHub CI
 on:
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron:  '* * * * *'
+    - cron:  '42 13 * * *'
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-      with:
-          ref: mesav/demoAction
     - name: IssueSummary
       id: issueSummary
       uses: ./.github/actions/summaryAction
