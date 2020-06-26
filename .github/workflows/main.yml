@@ -1,10 +1,9 @@
 name: GitHub CI
 
 on:
-  issues:
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron:  '12 6 * * *'
+    - cron:  '35 6 * * *'
 
 jobs:
   test:
