@@ -34,8 +34,8 @@ async function run(): Promise<void> {
     core.setOutput('openIssues', `${openIssues.length}`);
     core.setOutput('closedIssues', `${closedIssues.length}`);
     allIssuesLink = allIssuesLink.replace('api.github.com/repos/', 'github.com/');
-    openIssuesLink = allIssuesLink.concat('?q=is%3Aopen+is%3Aissue');
-    closedIssuesLink = allIssuesLink.concat('?q=is%3Aissue+is%3Aclosed');
+    openIssuesLink = allIssuesLink.concat('is%3Aopen+is%3Aissue');
+    closedIssuesLink = allIssuesLink.concat('is%3Aissue+is%3Aclosed');
     core.setOutput(
       'allIssuesLink',
       allIssuesLink,
