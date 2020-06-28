@@ -5,7 +5,7 @@ type: npm
 summary: 'Neo-Async is thought to be used as a drop-in replacement for Async, it almost
   fully covers its functionality and runs faster '
 homepage: https://github.com/suguru03/neo-async
-license: MIT
+license: mit
 licenses:
 - sources: LICENSE
   text: |
