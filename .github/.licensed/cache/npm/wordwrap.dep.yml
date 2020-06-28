@@ -4,7 +4,7 @@ version: 1.0.0
 type: npm
 summary: Wrap those words. Show them at what columns to start and stop.
 homepage: https://github.com/substack/node-wordwrap#readme
-license: other
+license: MIT
 licenses:
 - sources: LICENSE
   text: |
