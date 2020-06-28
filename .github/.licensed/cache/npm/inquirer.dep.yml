@@ -1,0 +1,15 @@
+---
+name: inquirer
+version: 5.2.0
+type: npm
+summary: A collection of common interactive command line user interfaces.
+homepage: https://github.com/SBoudrias/Inquirer.js#readme
+license: mit
+licenses:
+- sources: README.md
+  text: |-
+    <a name="license"></a>
+
+    Copyright (c) 2016 Simon Boudrias (twitter: [@vaxilart](https://twitter.com/Vaxilart))
+    Licensed under the MIT license.
+notices: []
