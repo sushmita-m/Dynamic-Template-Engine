@@ -29,7 +29,17 @@ async function run(): Promise<void> {
     const sourceType: string = core.getInput('sourceType', options);
     const clientTypeString: string = core.getInput('clientType');
     const accessToken: string = core.getInput('accessToken');
-    const data: string = core.getInput('data');
+    let data: string = core.getInput('data');
+    data = data.replace(/\\n/g, '\\n')
+      .replace(/\\'/g, "\\'")
+      .replace(/\\"/g, '\\"')
+      .replace(/\\&/g, '\\&')
+      .replace(/\\r/g, '\\r')
+      .replace(/\\t/g, '\\t')
+      .replace(/\\b/g, '\\b')
+      .replace(/\\f/g, '\\f');
+    // remove non-printable and other non-valid JSON chars
+    data = data.replace(/[\u0000-\u0019]+/g, '');
     core.debug(`Data Received: ${data}`);
     const dataJson: JSON = JSON.parse(data);
     const templateType: TemplateType = throwIfUndefined<TemplateType>(
