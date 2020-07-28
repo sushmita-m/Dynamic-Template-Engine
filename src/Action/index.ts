@@ -30,6 +30,8 @@ async function run(): Promise<void> {
     const clientTypeString: string = core.getInput('clientType');
     const accessToken: string = core.getInput('accessToken');
     let data: string = core.getInput('data');
+    core.debug(`Data Received: ${data}`);
+    core.debug(`Trying to remove invisble characters`);
     data = data.replace(/\\n/g, '\\n')
       .replace(/\\'/g, "\\'")
       .replace(/\\"/g, '\\"')
@@ -40,7 +42,7 @@ async function run(): Promise<void> {
       .replace(/\\f/g, '\\f');
     // remove non-printable and other non-valid JSON chars
     data = data.replace(/[\u0000-\u0019]+/g, '');
-    core.debug(`Data Received: ${data}`);
+    core.debug(`Data After CleanUp: ${data}`);
     const dataJson: JSON = JSON.parse(data);
     const templateType: TemplateType = throwIfUndefined<TemplateType>(
       TemplateTypeMap.get(templateTypeString),
