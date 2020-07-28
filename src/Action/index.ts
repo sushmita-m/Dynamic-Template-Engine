@@ -44,6 +44,7 @@ async function run(): Promise<void> {
     data = data.replace(/[\u0000-\u0019]+/g, '');
     core.debug(`Data After CleanUp: ${data}`);
     const dataJson: JSON = JSON.parse(data);
+    core.debug(`Done parsing input data`);
     const templateType: TemplateType = throwIfUndefined<TemplateType>(
       TemplateTypeMap.get(templateTypeString),
     );
