@@ -66,6 +66,7 @@ async function run(): Promise<void> {
       renderedTemplate = await eventTransformer.ConstructEventJson(templateType, sourceType,
         dataJson);
     }
+    core.debug(`Calculated template: ${renderedTemplate}`);
     renderedTemplate = JSON.parse(renderedTemplate);
     core.setOutput('renderedTemplate', renderedTemplate);
     const octokit = github.getOctokit(accessToken);
